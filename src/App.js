@@ -13,55 +13,32 @@ function App() {
         "Kiwi's"
     ]
     // creates an array of state objects with the initial count of 0 and the product name as key
-    const initialCounts = fruitProducts.map( (productName) => {
-        return { [productName]: 10 }
-    })
+    const initialCounts = fruitProducts.reduce((previousEntries, fruit) => ({...previousEntries, [fruit]: 10}), {})
     // defines the state
     const [allCounts, setCount] = useState(initialCounts)
 
 
-
-    function addToCount(index, product) {
-
-        console.log('ran')
-        console.log(index, product)
+    function addToCount(product) {
         // states aren't mutable so a new object is made with the changes to the relevant product
-        setCount((prevState)  => {
-            const newState = {...prevState}
-            newState[index][product] = newState[index][product] + 1
-            return newState
-        })
-
+        setCount({...allCounts, [product]: allCounts[product] + 1 })
     }
 
-    function subtractOfCount(index, product) {
-        console.log('ran')
-        console.log(index, product)
-        console.log(allCounts)
-        // states aren't mutable so a new object is made with the changes to the relevant product
-        setCount((prevState)  => {
-            const newState = {...prevState}
-            // subtracts 1 from the count of the relevant product by using the index and the product name
-            if (newState[index][product] >= 0) {
-                newState[index][product] = newState[index][product] - 1
-                return newState
-            }
-            // returns the previous state if the count is already 0 to prevent negative numbers
-            return newState
-        })
+    function subtractOfCount(product) {
+        // states aren't mutable so a new object is made with the changes to the relevant product if state larger than 0
+        allCounts[product] <= 0 || setCount( {...allCounts, [product]: allCounts[product] - 1 })
     }
 
     return (
         <>
             <h1>Fruitmand bezorgservice</h1>
+            {/*maps through the product array creating an element for each array entry*/}
             {fruitProducts.map( (productName, index) =>
             <FruitProduct
                 // key for React itself
                 key={index}
-                index={index}
                 productName={productName}
                 add={ addToCount }
-                currentCount={allCounts[index][productName]}
+                currentCount={allCounts[productName]}
                 subtract={ subtractOfCount }
             />
             )}
