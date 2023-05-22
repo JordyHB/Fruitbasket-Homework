@@ -12,7 +12,7 @@ function App() {
         "Appels",
         "Kiwi's"
     ]
-    // creates an array of state objects with the initial count of 0 and the product name as key
+    // creates a dynamic state object from the fruitproduct array. with the initial count of 0 and the product name as key
     const initialCounts = fruitProducts.reduce((previousEntries, fruit) => ({...previousEntries, [fruit]: 0}), {})
     // defines the state
     const [allCounts, setCount] = useState(initialCounts)
