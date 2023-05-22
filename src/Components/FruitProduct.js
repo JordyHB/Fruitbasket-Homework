@@ -1,7 +1,7 @@
 import ChangeCountButton from "./ChangeCountButton";
 
 
-function FruitProduct({ productName, add, subtract, currentCount, index}) {
+function FruitProduct({ productName, add, subtract, currentCount}) {
 
     return (
         <article>

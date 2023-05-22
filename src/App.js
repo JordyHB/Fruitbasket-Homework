@@ -13,7 +13,7 @@ function App() {
         "Kiwi's"
     ]
     // creates an array of state objects with the initial count of 0 and the product name as key
-    const initialCounts = fruitProducts.reduce((previousEntries, fruit) => ({...previousEntries, [fruit]: 10}), {})
+    const initialCounts = fruitProducts.reduce((previousEntries, fruit) => ({...previousEntries, [fruit]: 0}), {})
     // defines the state
     const [allCounts, setCount] = useState(initialCounts)
 
@@ -42,6 +42,10 @@ function App() {
                 subtract={ subtractOfCount }
             />
             )}
+
+            <button onClick={ () =>  setCount(initialCounts) }>Reset</button>
+
+
         </>
     );
 }
